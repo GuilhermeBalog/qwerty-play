@@ -1,0 +1,112 @@
+html,
+body {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+input,
+button {
+  font-family: "Rubik", sans-serif;
+}
+
+#main {
+  height: 100%;
+  background: #fef0f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  font-weight: 900;
+  font-size: 3rem;
+  letter-spacing: 0.2rem;
+}
+
+p {
+  margin-bottom: 1.5rem;
+}
+
+p a {
+  text-decoration: none;
+  color: inherit;
+}
+
+p strong {
+  font-weight: 500;
+}
+
+form {
+  margin-bottom: 1rem;
+}
+
+.row {
+  display: flex;
+}
+
+input {
+  padding: 0.5em 1em;
+  margin: 0.2em;
+  border: 3px solid black;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: #fff;
+  border-radius: 0.5em;
+}
+
+button {
+  padding: 0.5em 1em;
+  margin: 0.2em;
+  border: 3px solid black;
+  text-transform: uppercase;
+  font-weight: bold;
+  background: #000;
+  color: #fff;
+  border-radius: 0.5em;
+}
+
+.row > div {
+  padding: 0.5em 0.75em;
+  margin: 0.2em;
+  border: 3px solid black;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: #fff;
+  border-radius: 0.5em;
+  width: 1rem;
+  text-align: center;
+}
+
+.row > div.active {
+  background: #000;
+}
+
+#letter-space {
+  width: 5rem;
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .row > div {
+    padding: 0.25em 0.35em;
+    margin: 0.1em;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .row > div {
+    padding: 0.25em 0.35em;
+    margin: 0.1em;
+    font-size: 0.6em;
+    border-width: 2px;
+  }
+}

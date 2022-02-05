@@ -19,6 +19,45 @@ const layout = [
 	["space"]
 ];
 
+function id(key) {
+	return `letter-${key}`;
+}
+
+function delay(time) {
+	return new Promise((res) => setTimeout(res, time));
+}
+
+function activate(key) {
+	if (key == " ") key = "space";
+
+	if (isInLayout(key)) {
+		document
+			.querySelector(`#${id(key)}`)
+			.classList
+			.add("active");
+	}
+
+}
+
+function deactivate(key) {
+	if (key == " ") key = "space";
+
+	if (isInLayout(key)) {
+		document
+			.querySelector(`#${id(key)}`)
+			.classList
+			.remove("active");
+	}
+}
+
+function isInLayout(key) {
+	for (const row of layout) {
+		if (row.includes(key)) return true;
+	}
+
+	return false;
+}
+
 layout.forEach((row) => {
 	const keyboardRow = document.createElement("div");
 
@@ -26,7 +65,7 @@ layout.forEach((row) => {
 
 	row.forEach((letter) => {
 		const key = document.createElement("div");
-		key.id = "letter-" + letter;
+		key.id = id(letter);
 		key.innerHTML = letter;
 
 		keyboardRow.appendChild(key);
@@ -35,42 +74,31 @@ layout.forEach((row) => {
 	main.appendChild(keyboardRow);
 });
 
-document.addEventListener("keyup", (e) => {
-	play(e.key);
+document.addEventListener("keydown", (e) => {
+	activate(e.key);
 });
 
-function isInLayout(key) {
-	for (row of layout) {
-		if (row.includes(key)) return true;
-	}
+document.addEventListener("keyup", (e) => {
+	deactivate(e.key);
+})
 
-	return false;
+async function play(key) {
+	activate(key)
+
+	await delay(150)
+	deactivate(key)
+
+	await delay(100)
 }
 
-function play(key) {
-	return new Promise((res) => {
-		if (key == " ") key = "space";
-
-		if (isInLayout(key)) {
-			document.querySelector(`#letter-${key}`).classList.add("active");
-
-			setTimeout(() => {
-				document.querySelector(`#letter-${key}`).classList.remove("active");
-
-				delay().then(() => {
-					res();
-				});
-			}, 100);
-		}
-	});
-}
-
-function delay(time = 50) {
-	return new Promise((res) => setTimeout(res, time));
-}
+let isPlaying = false;
 
 document.querySelector("form").addEventListener('submit', async (e) => {
 	e.preventDefault()
+
+	if (isPlaying) return
+	isPlaying = true
+	console.log(e)
 
 	const value = input.value;
 	const letters = value.split("");
@@ -78,4 +106,6 @@ document.querySelector("form").addEventListener('submit', async (e) => {
 	for (const letter of letters) {
 		await play(letter.toLowerCase());
 	}
+
+	isPlaying = false
 })

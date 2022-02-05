@@ -60,6 +60,10 @@ input {
   border-radius: 0.5em;
 }
 
+input:focus {
+  outline: none;
+}
+
 button {
   padding: 0.5em 1em;
   margin: 0.2em;
@@ -69,6 +73,15 @@ button {
   background: #000;
   color: #fff;
   border-radius: 0.5em;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #909090;
+}
+
+button:focus {
+  outline: none;
 }
 
 .row > div {
